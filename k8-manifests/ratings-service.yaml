@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"ratings","service":"ratings"},"name":"ratings","namespace":"default"},"spec":{"ports":[{"name":"http","port":9080}],"selector":{"app":"ratings"}}}
+  creationTimestamp: "2023-08-25T21:15:40Z"
+  labels:
+    app: ratings
+    service: ratings
+  name: ratings
+  namespace: default
+  resourceVersion: "28804"
+  uid: 6e3e9346-9a7b-4739-b1d0-3ee60a5f4b40
+spec:
+  clusterIP: 10.107.50.214
+  clusterIPs:
+  - 10.107.50.214
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 9080
+    protocol: TCP
+    targetPort: 9080
+  selector:
+    app: ratings
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
