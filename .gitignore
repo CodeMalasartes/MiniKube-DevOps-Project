@@ -1,0 +1,6 @@
+# Ignore Istio related directories and files
+istio-version/
+istio-configs/
+
+# Ignore ArgoCD executable
+argocd.exe
