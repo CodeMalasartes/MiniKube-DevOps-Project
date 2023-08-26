@@ -294,6 +294,35 @@ data:
         - __meta_kubernetes_pod_phase
       scrape_interval: 5m
       scrape_timeout: 30s
+      - job_name: 'istio-mesh'
+        kubernetes_sd_configs:
+        - role: endpoints
+          namespaces:
+            names:
+            - istio-system
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+          action: keep
+          regex: istio-telemetry;prometheus
+          - job_name: 'argo-cd'
+            kubernetes_sd_configs:
+            - role: pod
+              namespaces:
+                names:
+                - argocd
+            relabel_configs:
+            - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+              action: keep
+              regex: true
+            - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+              action: replace
+              target_label: __address__
+              regex: ([^:]+)(?::\d+)?;(\d+)
+              replacement: $1:$2
+            - action: labelmap
+              regex: __meta_kubernetes_pod_label_(.+)
+
+
   recording_rules.yml: |
     {}
   rules: |
