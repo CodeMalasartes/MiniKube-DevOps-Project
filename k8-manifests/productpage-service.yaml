@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"productpage","service":"productpage"},"name":"productpage","namespace":"default"},"spec":{"ports":[{"name":"http","port":9080}],"selector":{"app":"productpage"}}}
+  creationTimestamp: "2023-08-25T21:15:40Z"
+  labels:
+    app: productpage
+    service: productpage
+  name: productpage
+  namespace: default
+  resourceVersion: "28865"
+  uid: 48308431-8857-49b4-b32b-805f617b1cb0
+spec:
+  clusterIP: 10.106.229.52
+  clusterIPs:
+  - 10.106.229.52
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 9080
+    protocol: TCP
+    targetPort: 9080
+  selector:
+    app: productpage
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

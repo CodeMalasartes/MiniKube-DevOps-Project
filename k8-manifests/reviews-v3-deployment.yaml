@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"reviews","version":"v3"},"name":"reviews-v3","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"reviews","version":"v3"}},"template":{"metadata":{"labels":{"app":"reviews","version":"v3"}},"spec":{"containers":[{"env":[{"name":"LOG_DIR","value":"/tmp/logs"}],"image":"docker.io/istio/examples-bookinfo-reviews-v3:1.17.0","imagePullPolicy":"IfNotPresent","name":"reviews","ports":[{"containerPort":9080}],"securityContext":{"runAsUser":1000},"volumeMounts":[{"mountPath":"/tmp","name":"tmp"},{"mountPath":"/opt/ibm/wlp/output","name":"wlp-output"}]}],"serviceAccountName":"bookinfo-reviews","volumes":[{"emptyDir":{},"name":"wlp-output"},{"emptyDir":{},"name":"tmp"}]}}}}
+  creationTimestamp: "2023-08-25T21:15:40Z"
+  generation: 1
+  labels:
+    app: reviews
+    version: v3
+  name: reviews-v3
+  namespace: default
+  resourceVersion: "107228"
+  uid: 09bcb1c9-b60b-4a13-ae76-cc5413cbc9bc
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: reviews
+      version: v3
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: reviews
+        version: v3
+    spec:
+      containers:
+      - env:
+        - name: LOG_DIR
+          value: /tmp/logs
+        image: docker.io/istio/examples-bookinfo-reviews-v3:1.17.0
+        imagePullPolicy: IfNotPresent
+        name: reviews
+        ports:
+        - containerPort: 9080
+          protocol: TCP
+        resources: {}
+        securityContext:
+          runAsUser: 1000
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /opt/ibm/wlp/output
+          name: wlp-output
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: bookinfo-reviews
+      serviceAccountName: bookinfo-reviews
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - emptyDir: {}
+        name: wlp-output
+      - emptyDir: {}
+        name: tmp
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2023-08-25T21:15:40Z"
+    lastUpdateTime: "2023-08-25T21:17:13Z"
+    message: ReplicaSet "reviews-v3-797fc48bc9" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2023-08-26T15:05:42Z"
+    lastUpdateTime: "2023-08-26T15:05:42Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
