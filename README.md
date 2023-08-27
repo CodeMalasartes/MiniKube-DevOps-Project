@@ -93,3 +93,6 @@ Replace `<local_port>` with your desired local port.
 2. Create a new feature branch.
 3. Make your changes.
 4. Submit a pull request.
+
+
+C:\Users\RR\Desktop\MiniKube-DevOps\Capture.PNG
