@@ -95,4 +95,3 @@ Replace `<local_port>` with your desired local port.
 4. Submit a pull request.
 
 
-C:\Users\RR\Desktop\MiniKube-DevOps\Capture.PNG
